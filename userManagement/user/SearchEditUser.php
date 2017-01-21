@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">University Student Information App</a>
+                <a class="navbar-brand" href="SearchEditUser.php">University Student Information App</a>
             </div>
             <!-- /.navbar-header -->
 
