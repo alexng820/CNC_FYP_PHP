@@ -35,7 +35,7 @@
             //Update user data
 			if ($submit=="update"){
                 if($password==""){
-                    $query = "UPDATE user SET name='".$name."',gender='".$gender."', role='".$role."',email='".$email."',status='".$status."'  WHERE user_id='".$user_id."'";
+                    $query = "UPDATE user SET name='".$name."',gender='".$gender."', role='".$role."',status='".$status."'  WHERE user_id='".$user_id."'";
                     $results = $conn->query($query);
                 }
                 if($password){
@@ -65,7 +65,6 @@
 				$name=$data->name;
 				$gender=$data->gender;
 				$role=$data->role;
-				$email=$data->email;
 				$status=$data->status;
 
 
@@ -173,7 +172,7 @@
                                         Password:
                                         </td>
                                         <td >
-                                        <input type="password" name="password"  >
+                                        <input type="password" name="password"  pattern=".{6,}" >at least 6 characters
                                         </td>
 									</tr>
                                     <tr>
@@ -181,7 +180,7 @@
                                         Name:
                                         </td>
                                         <td >
-                                        <input type="text" name="name" <?php print "value='$name'"; ?> >
+                                        <input type="text" name="name" <?php print "value='$name'"; ?> required>
                                         </td>
                                     </tr>
 									<tr>
@@ -189,9 +188,9 @@
 										Gender:
 										</td>
 										<td >
-										<select type="text" id="gender" name="gender">
+										<select type="text" id="gender" name="gender" >
                                          <option value="M">Male</option>
-                                        <option value="F">Female</option>
+                                        <option value="F" <?php if($gender=="F") echo"selected";?>>Female</option>
                                          <?php print "value = 'gender'"; ?> >>
                                         </select> 
 										</td>
@@ -202,20 +201,12 @@
 										</td>
 										<td >
 										<select type="text" id="role" name="role" >
-                                        <option value="Student">Student</option>
-                                        <option value="Teacher">Teacher</option>
-                                        <option value="Admin">Admin</option>
+                                        <option value="Student" <?php if($role=="Student") echo"selected";?>>Student</option>
+                                        <option value="Teacher" <?php if($role=="Teacher") echo"selected";?>>Teacher</option>
+                                        <option value="Admin" <?php if($role=="Admin") echo"selected";?>>Admin</option>
                                         <?php print "value = 'role'"; ?> >>
                                         </select>
 										</td>
-									</tr>
-									<tr>
-										<td >
-                                        E-mail:
-                                        </td>
-                                        <td >
-                                        <input type="text" name="email" <?php print "value='$email'"; ?> >
-                                        </td>
 									</tr>
 									<tr>
 										<td >
@@ -224,7 +215,7 @@
 										<td >
 										<select type="text" id="status" name="status" >
                                         <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                        <option value="Inactive" <?php if($status=="Inactive") echo"selected";?>>Inactive</option>
                                         
                                         <?php print "value = 'status'"; ?> >>
                                         </select>
@@ -247,7 +238,6 @@
                                         <th>Name</th>  
                                         <th>Gender</th>
                                         <th>Role</th>
-                                        <th>E-mail</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -265,7 +255,6 @@
                                             print "<td>" . $row->name. "</td>";
                                             print "<td>" . $row->gender. "</td>";
                                             print "<td>" . $row->role. "</td>";
-                                            print "<td>" . $row->email. "</td>";
                                             print "<td>" . $row->status. "</td>";
                                             
                                             print '</tr>';

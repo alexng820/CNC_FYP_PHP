@@ -34,31 +34,52 @@
         include('session.php');
 		extract($_POST);
 		if(isset($submit)){
+// //create
+// if ($_POST['submit'] ){
+    // if(!isset($name) || trim($name) == ''||!isset($password) || trim($password) == ''||!isset($password_comfirm) || trim($password_comfirm) == ''||!isset($role) || trim($role) == ''||!isset($gender) ||
+     // trim($gender) == ''||!isset($email) ||!isset($status) || trim($status) == '')
+// { echo "<script type='text/javascript'>alert('Please enter all required fields.')</script>";
+// }
+// else{
+    // if($password==$password_comfirm){
+        // $options = [
+        // 'cost' => 12,
+        // ];
+        // $hashed_password = password_hash($password, PASSWORD_BCRYPT,$options);
+        // $sql = "INSERT INTO user (password, name,role,gender,status)
+        // VALUES ('$hashed_password','$name','$role','$gender','$status')";
+        // $results=$conn->query($sql);
+    // if ($results) {
+     // echo "<script type='text/javascript'>alert('User is created !')</script>";
+                        // $action="user updated by Admin";
+                    // } 
+				// }else{
+					// echo "<script type='text/javascript'>alert('Password not match !')</script>";
 
-//create
-if ($_POST['submit'] ){
-    if(!isset($name) || trim($name) == ''||!isset($password) || trim($password) == ''||!isset($password_comfirm) || trim($password_comfirm) == ''||!isset($role) || trim($role) == ''||!isset($gender) ||
-     trim($gender) == ''||!isset($email) || trim($email) == ''||!isset($status) || trim($status) == '')
-{ echo "<script type='text/javascript'>alert('Please enter all required fields.')</script>";
-}
-else{
-    if($password==$password_comfirm){
-        $options = [
-        'cost' => 12,
-        ];
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT,$options);
-        $sql = "INSERT INTO user (password, name,role,gender,email,status)
-        VALUES ('$hashed_password','$name','$role','$gender','$email','$status')";
-        $results=$conn->query($sql);
-    if ($results) {
-     echo "<script type='text/javascript'>alert('User is created !')</script>";
-                        $action="user updated by Admin";
-                    } 
+				// }
+                // }
+			// }
+		// }
+			if($submit=="Create"){
+				if($password==$password_comfirm){
+					$options = ['cost' => 12,];
+					$hashed_password = password_hash($password, PASSWORD_BCRYPT,$options);
+					$sql = "INSERT INTO user (user_id,password, name,role,gender,status)VALUES (null,'$hashed_password','$name','$role','$gender','$status')";
+					$result = mysqli_query($conn,$sql);
+					if ($result) {
+						if($role=="Admin"){$user_id=(sprintf("a%08s",mysqli_insert_id($conn)));}
+						if($role=="Student"){$user_id=(sprintf("s%08s",mysqli_insert_id($conn)));}
+						if($role=="Teacher"){$user_id=(sprintf("t%08s",mysqli_insert_id($conn)));}						
+						$sql="UPDATE `user` SET `user_id`='".$user_id."' WHERE id=".mysqli_insert_id($conn);
+						$result2 = mysqli_query($conn,$sql);
+						if ($result2) {
+							echo "<script type='text/javascript'>alert('User is created !')</script>";
+						}
+					}
 				}else{
 					echo "<script type='text/javascript'>alert('Password not match !')</script>";
-
 				}
-                }
+				
 			}
 		}
 	 ?>
@@ -154,7 +175,7 @@ else{
                                         Name:
                                         </td>
                                         <td>
-                                        <input type="text" name="name">
+                                        <input type="text" name="name"   required>
                                         </td>
                                     </tr>
                                     <tr>
@@ -162,7 +183,7 @@ else{
                                         Password:
                                         </td>
                                         <td>
-                                        <input type="password" name="password">
+                                        <input type="password" name="password" pattern=".{6,}" required> at least 6 characters
                                         </td>
                                     </tr>
                                     <tr>
@@ -170,7 +191,7 @@ else{
                                         Password Confirmation:
                                         </td>
                                         <td>
-                                        <input type="password" name="password_comfirm">
+                                        <input type="password" name="password_comfirm" pattern=".{6,}" required>
                                         </td>
                                     </tr>
 									
@@ -179,7 +200,7 @@ else{
                                         Gender:
                                         </td>
                                         <td>
-                                        <input type="radio" name="gender" value="M"> Male &nbsp;    
+                                        <input type="radio" name="gender" value="M" required> Male &nbsp;    
                                         <input type="radio" name="gender" value="F" > Female
                                         </td>
                                     </tr>
@@ -198,20 +219,12 @@ else{
                                         </td>
                                     </tr>
                                     
-									<tr>
-										<td>
-										Email:
-										</td>
-										<td>
-										<input type="text" name="email">
-										</td>
-									</tr>
 									 <tr>
                                         <td>
                                         Status:
                                         </td>
                                         <td>
-                                        <input type="radio" name="status" value="Active"> Active     
+                                        <input type="radio" name="status" value="Active" required> Active     
                                         <input type="radio" name="status" value="Inactive" > Inactive
                                         </td>
                                     </tr>
@@ -221,7 +234,7 @@ else{
 							</div>
 						<!-- /.panel -->
 							<div align="center">
-								<input style="padding-right:25px;padding-left:25px" type="submit" name="submit" id="create" value="Create" >
+								<input style="padding-right:25px;padding-left:25px" type="submit" name="submit" id="submit" value="Create" >
 								
 							</div>
 							<br/>

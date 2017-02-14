@@ -117,11 +117,11 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                                 <thead>
                                     <tr>
+									
                                         <th>User ID</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th>Role</th>
-                                        <th>E-mail</th>
                                         <th>Status</th>
                                         
                                     </tr>
@@ -141,7 +141,6 @@
 											print "<td>" . $row->name. "</td>";
 											print "<td>" . $row->gender. "</td>";
 											print "<td>" . $row->role. "</td>";
-                                            print "<td>" . $row->email. "</td>";
 											print "<td>" . $row->status. "</td>";
 											
                                             
