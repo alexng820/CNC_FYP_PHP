@@ -61,6 +61,8 @@
 									<li><a href="SearchEditUser.php">Search/Edit User</a></li>
 									<li><a href="CreatePrograme.php">Create Programe</a></li>
 									<li><a href="SearchEditPrograme.php">Search/Edit Programe</a></li>
+									<li><a href="CreateCourse.php">Create Course</a></li>
+									<li><a href="SearchEditCourse.php">Search/Edit Course</a></li>
 								</ul>
 								<!-- /.nav-second-level -->
 							</li>
