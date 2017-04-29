@@ -5,12 +5,11 @@
 	extract($_POST);
 
 	if (isset($submit)) {
-		if ($submit == "Create") {
-			$sql = "INSERT INTO programe (prog_code, name, degree, year) VALUES ('$prog_code', '$name', '$degree', '$year')";
-			$result = mysqli_query($conn, $sql);
-			if ($result) {
-				echo "<script type='text/javascript'>alert('New programe is created!')</script>";
-			}
+		$sql = "INSERT INTO programe (prog_code, name, degree, year) VALUES ('$prog_code', '$name', '$degree', '$year')";
+		$result = mysqli_query($conn, $sql);
+		if ($result) {
+			echo "<script type='text/javascript'>alert('New programe is created!');";
+			echo "window.location.href = 'SearchEditPrograme.php';</script>";
 		}
 	}
 ?>

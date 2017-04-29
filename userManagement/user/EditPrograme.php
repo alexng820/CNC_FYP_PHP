@@ -6,13 +6,11 @@
 	$prog_code=$_GET['prog_code'];
 
 	if (isset($submit)) {
-		//Update user data
-		if ($submit == "update") {
-			$query = "UPDATE programe SET prog_code = '$prog_code', name = '$name', degree = '$degree', year = '$year' WHERE prog_code = '$prog_code'";
-			$results = $conn->query($query);
-			if ($results) {
-				echo "<script type='text/javascript'>alert('Update successfully.')</script>";
-			}
+		$query = "UPDATE programe SET prog_code = '$prog_code', name = '$name', degree = '$degree', year = '$year' WHERE prog_code = '$prog_code'";
+		$results = $conn->query($query);
+		if ($results) {
+			echo "<script type='text/javascript'>alert('New programe is created!')";
+			echo "window.location.href = 'SearchEditPrograme.php';</script>";
 		}
 	} else {
 		$query = "SELECT * FROM programe WHERE prog_code = '$prog_code'";
