@@ -33,12 +33,14 @@
 
     <div id="wrapper">
 
- 
+        <!-- Navigation -->
+        
         <?php include 'navbar.php'; ?>
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Search/Edit User</h1>
+                    <h1 class="page-header">Search/Edit Event</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -48,7 +50,7 @@
                     <form id="createsingleuser" autocomplete="off" action="" method="POST">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                            Search user
+                            Search event
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -56,31 +58,43 @@
                                 <thead>
                                     <tr>
 									
-                                        <th>User ID</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Role</th>
+                                        <th>Event ID</th>
+                                        <th>Topic</th>
+                                        <th>Guest</th>
+                                        <th>Participant limit</th>
+                                        <th>Location</th>
+                                        <th>Approval</th>
+                                        <th>Posttime</th>
+                                        <th>Date</th>
                                         <th>Status</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
 									<?php
-										$query = "SELECT * FROM user";
+										$query = "SELECT * FROM Event";
 										$result = $conn->query($query);
 										if (!$conn->query($query)) {
 											print $conn->error;
 										}
-                                        //List out all user data
+                                 //List out all event data
 										while ($row = $result->fetch_object()) {
 											print "<tr class='odd gradeX'>";
-											print "<td><a href='EditUser.php?user_id=" . $row->user_id. "'>" . $row->user_id. "</a></td>";
+											print "<td><a href='EditEvent.php?event_id=" . $row->event_id. "'>" . $row->event_id. "</a></td>";
 											
-											print "<td>" . $row->name. "</td>";
-											print "<td>" . $row->gender. "</td>";
-											print "<td>" . $row->role. "</td>";
-											print "<td>" . $row->status. "</td>";
-											
+											print "<td>" . $row->topic. "</td>";
+											print "<td>" . $row->guest. "</td>";
+											print "<td>" . $row->limit_participant. "</td>";
+											print "<td>" . $row->location. "</td>";
+                                            if ($row->need_approved=='1') {
+                                                print "<td>Yes</td>";
+
+                                            } else {
+                                                print "<td>No</td>";
+                                            }
+                                            
+                                            print "<td>" . $row->postime. "</td>";
+                                            print "<td>" . $row->date. "</td>";
+                                            print "<td>" . $row->status. "</td>";
                                             
     
 											print '</tr>';
