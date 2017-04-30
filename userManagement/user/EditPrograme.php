@@ -9,7 +9,7 @@
 		$query = "UPDATE programe SET prog_code = '$prog_code', name = '$name', degree = '$degree', year = '$year' WHERE prog_code = '$prog_code'";
 		$results = $conn->query($query);
 		if ($results) {
-			echo "<script type='text/javascript'>alert('New programe is created!')";
+			echo "<script type='text/javascript'>alert('Programe is updated!');";
 			echo "window.location.href = 'SearchEditPrograme.php';</script>";
 		}
 	} else {
