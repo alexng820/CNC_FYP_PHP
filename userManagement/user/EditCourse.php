@@ -6,16 +6,16 @@
 	$course_code=$_GET['course_code'];
 
 	if (isset($submit)) {
+		$query = "SELECT * FROM course WHERE course_code = '$course_code'";
+		$results = $conn->query($query);
+		if ($data = $results->fetch_object()) {
+			$num_of_section = $data->num_of_section;
+		}
 		$query = "UPDATE course SET name = '$name', num_of_section = '$newSectionNumber' WHERE course_code = '$course_code'";
 		$results = mysqli_query($conn, $query);
 		if (!$results) {
 			echo "<script type='text/javascript'>alert('Error: Operation failed!');";
 			echo "window.location.href = 'SearchEditCourse.php';</script>";
-		}
-		$query = "SELECT * FROM course WHERE course_code = '$course_code'";
-		$results = $conn->query($query);
-		if ($data = $results->fetch_object()) {
-			$num_of_section = $data->num_of_section;
 		}
 		for ($i=0; $i<=$newSectionNumber; $i++) {
 			if ($i <= $num_of_section) {
